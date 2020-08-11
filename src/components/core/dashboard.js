@@ -35,9 +35,8 @@ const styles = theme => ({
 
 function Dashboard(props) {
 	const { classes } = props
-    const [quote, setQuote] = useState('')
+    const [quote, setQuotes] = useState('')
 
-	
 
 	if(!firebase.getCurrentUsername()) {
 		// not logged in
