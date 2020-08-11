@@ -6,6 +6,9 @@ import firebase from "../../config/firebase.js"
 import { withRouter } from 'react-router-dom'
 
 const styles = theme => ({
+    background: {
+        backgroundColor: "#2D5D7B",
+    },
 	main: {
 		width: 'auto',
 		display: 'block', // Fix IE 11 issue.
@@ -15,7 +18,8 @@ const styles = theme => ({
 			width: 400,
 			marginLeft: 'auto',
 			marginRight: 'auto',
-		},
+        },
+        
 	},
 	paper: {
 		marginTop: theme.spacing.unit * 8,
@@ -47,25 +51,27 @@ function Dashboard(props) {
 
 	
 	return (
-		<main className={classes.main}>
-			<Paper className={classes.paper}>
-				<Avatar className={classes.avatar}>
-					<VerifiedUserOutlined />
-				</Avatar>
-				<Typography component="h1" variant="h5">
-					Hello { firebase.getCurrentUsername() }
-				</Typography>
-				<Button
-					type="submit"
-					fullWidth
-					variant="contained"
-					color="secondary"
-					onClick={logout}
-					className={classes.submit}>
-					Logout
-          		</Button>
-			</Paper>
-		</main>
+        <div className = {classes.background}>
+            <main className={classes.main}>
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <VerifiedUserOutlined />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Hello { firebase.getCurrentUsername() }
+                    </Typography>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="secondary"
+                        onClick={logout}
+                        className={classes.submit}>
+                        Logout
+                    </Button>
+                </Paper>
+            </main>
+        </div>
 	)
 
 	async function logout() {
