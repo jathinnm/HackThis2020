@@ -9,6 +9,8 @@ import { CssBaseline, CircularProgress } from '@material-ui/core'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import firebase from "../../config/firebase.js"
 
+
+
 const theme = createMuiTheme()
 
 export default function App() {
