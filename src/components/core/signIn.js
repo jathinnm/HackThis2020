@@ -4,8 +4,16 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link, withRouter } from 'react-router-dom'
 import firebase from "../../config/firebase.js"
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const styles = theme => ({
+	modal: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	  },
 	main: {
 		width: 'auto',
 		display: 'block', // Fix IE 11 issue.
@@ -45,6 +53,19 @@ function SignIn(props) {
 
 	return (
 		<main className={classes.main}>
+			<Modal
+					aria-labelledby="transition-modal-title"
+					aria-describedby="transition-modal-description"
+					className={classes.modal}
+					open={props.loginOpen}
+					onClose={props.handleLoginClose}
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+					timeout: 500,
+					}}
+			>
+			<Fade in={props.loginOpen}>
 			<Paper className={classes.paper}>
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
@@ -70,7 +91,7 @@ function SignIn(props) {
 						className={classes.submit}>
 						Sign in
           			</Button>
-					<Button
+					{/* <Button
 						type="submit"
 						fullWidth
 						variant="contained"
@@ -79,9 +100,11 @@ function SignIn(props) {
 						to="/register"
 						className={classes.submit}>
 						Register
-          			</Button>
+          			</Button> */}
 				</form>
 			</Paper>
+			</Fade>
+      </Modal>
 		</main>
 	)
 

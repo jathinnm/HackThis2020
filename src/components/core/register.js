@@ -4,7 +4,16 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link, withRouter } from 'react-router-dom'
 import firebase from "../../config/firebase.js"
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+
 const styles = theme => ({
+	modal: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	  },
 	main: {
 		width: 'auto',
 		display: 'block', // Fix IE 11 issue.
@@ -44,6 +53,19 @@ function Register(props) {
 	const [password, setPassword] = useState('')
 	return (
 		<main className={classes.main}>
+			<Modal
+					aria-labelledby="transition-modal-title"
+					aria-describedby="transition-modal-description"
+					className={classes.modal}
+					open={props.registerOpen}
+					onClose={props.handleRegisterClose}
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+					timeout: 500,
+					}}
+			>
+			<Fade in={props.registerOpen}>
 			<Paper className={classes.paper}>
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
@@ -74,18 +96,20 @@ function Register(props) {
 						Register
           			</Button>
 
-					<Button
+					{/* <Button
 						type="submit"
 						fullWidth
 						variant="contained"
 						color="secondary"
 						component={Link}
-						to="/login"
+						to="/"
 						className={classes.submit}>
-						Go back to Login
-          			</Button>
+						Go back to Home
+          			</Button> */}
 				</form>
 			</Paper>
+			</Fade>
+      </Modal>
 		</main>
 	)
 
