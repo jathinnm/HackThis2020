@@ -30,11 +30,11 @@ const config = {
       return this.auth.signOut()
     }
   
-    async register(name, email, password,number) {
+    async register(name, email, password, number) {
       await this.auth.createUserWithEmailAndPassword(email, password)
       return this.auth.currentUser.updateProfile({
         displayName: name,
-        number: number
+        phoneNumber:number
       })
     }
   
@@ -50,7 +50,7 @@ const config = {
       return this.auth.currentUser && this.auth.currentUser.displayName
     }
     getCurrentNumber() {
-      return this.auth.currentUser && this.auth.currentUser.number
+      return this.auth.currentUser && this.auth.currentUser.phoneNumber
     }
   
     

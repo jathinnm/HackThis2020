@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -16,6 +16,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import firebase from "../../config/firebase.js"
 import Axios from 'axios';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
+
+
 function getSteps() {
+   
   return ['Why are you using (insert app name)?', 'Select your year in college', 'Select your major/career area', 'Select your primary interest'];
 }
 
@@ -68,12 +73,35 @@ function Questions() {
     similarInterests: false,
   });
   const [groupId, setGroupId] = React.useState('');
+  const [phoneNumber, setPhoneNumber] = React.useState('');
 
   const { meetPeople, network, similarInterests } = reason;
 
   const steps = getSteps();
 
-
+ useEffect(() => {
+    const db = firebase.db;
+    db.settings({
+        timestampsInSnapshots: true
+      });
+   
+    var docRef = db.collection('users').doc(firebase.getCurrentUsername());
+    console.log(docRef);
+    
+    docRef.get().then(function (doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        setPhoneNumber(doc.data().phoneNumber)
+        
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+    
+})
   const handleReasonChange = (event) => {
     setReason({ ...reason, [event.target.name]: event.target.checked });
   };
@@ -247,13 +275,14 @@ function Questions() {
                   </Button>
 
                   <Button
-                    type="submit"
-                    onClick={onFormSubmit}
                     variant="contained"
-                    color="secondary"
-                    className={classes.button}>
-                    Submit
-                    </Button>
+                    color="primary"
+                    onClick={onFormSave}
+                    onMouseUp = {handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
 
                 </div>
               </div>
@@ -269,6 +298,14 @@ function Questions() {
             <Button onClick={handleReset} className={classes.button}>
               Reset
           </Button>
+          <Button
+                    type='submit'
+                    onClick={onFormSubmit}
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}>
+                    Submit
+            </Button>
           </Paper>
         )}
       </form>
@@ -276,9 +313,9 @@ function Questions() {
     </div>
   );
 
-  async function onFormSubmit(e) {
-
-    e.preventDefault()
+  async function onFormSave(e) {
+    
+   
     const db = firebase.db;
     db.settings({
       timestampsInSnapshots: true
@@ -312,17 +349,23 @@ function Questions() {
       }).catch(function (error) {
         console.log("Error getting document:", error);
       });
-      console.log(groupId);
+      
 
       // need to figure out how to call groupID from firebase
       // need to figure out how to call profile info
       // const groupId = "61254788";
       // const phone_number = 
-
-      if (groupId != '') {
+      
+   
+    }
+  }
+  async function onFormSubmit(e) {
+      e.preventDefault()
+    console.log(groupId);
+    if (groupId != '') {
         const nickname = firebase.getCurrentUsername();
         const url = 'https://api.groupme.com/v3/groups/' + groupId + '/members/add?token=2qAO3FVAg5rM2QPaWYEJeHhjnKNYjFxJCceR3CSy';
-
+        console.log(phoneNumber)
         const response = await Axios.post(
 
           url,
@@ -330,7 +373,7 @@ function Questions() {
             "members": [
               {
                 "nickname": nickname,
-                "phone_number": "+1 3095317104"
+                "phone_number": phoneNumber
               }]
           }
 
@@ -340,10 +383,9 @@ function Questions() {
       }
         
       
-      alert("Your group has been created")
-      console.log(response.data.response);
+      alert("You have been added to the group")
     }
-  }
+
 }
 
 

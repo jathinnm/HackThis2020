@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,7 +15,6 @@ import CreateIcon from '@material-ui/icons/Create';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import firebase from "../../config/firebase.js"
-import React, {useState } from 'react'
 import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
 import Questions from "../generic/questions.js"
 import Grid from '@material-ui/core/Grid';
@@ -84,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PermanentDrawerLeft(props) {
   const classes = useStyles();
   const [quote, setQuotes] = useState('')
+  
 
   if(!firebase.getCurrentUsername()) {
 	// not logged in
@@ -98,7 +99,7 @@ export default function PermanentDrawerLeft(props) {
        <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h4" noWrap className={classes.typography}>
-		  Hello { firebase.getCurrentNumber() }
+		  Hello { firebase.getCurrentUsername() }
           </Typography>
         </Toolbar>
       </AppBar> 
@@ -146,7 +147,7 @@ export default function PermanentDrawerLeft(props) {
 	  
 	  </div>
       <Paper item className={classes.content}>
-	  <div><Typography variant = 'h1'>Hello</Typography></div>
+	  <div><Typography variant = 'h2'>Please Fill Out The Questionnaire</Typography></div>
 	  <Questions/>
 	
       </Paper>
