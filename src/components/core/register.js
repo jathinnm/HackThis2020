@@ -8,6 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
+
 const styles = theme => ({
 	modal: {
 		display: 'flex',
@@ -50,7 +51,12 @@ function Register(props) {
 
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
+	const [number, setNumber] = useState('')
 	const [password, setPassword] = useState('')
+	const addUser = e => {
+		
+		
+	  };
 	return (
 		<main className={classes.main}>
 			<Modal
@@ -83,6 +89,10 @@ function Register(props) {
 						<Input id="email" name="email" autoComplete="off" value={email} onChange={e => setEmail(e.target.value)}  />
 					</FormControl>
 					<FormControl margin="normal" required fullWidth>
+						<InputLabel htmlFor="email">Phone Number</InputLabel>
+						<Input id="number" name="number" autoComplete="off" value={number} onChange={e => setNumber(e.target.value)}  />
+					</FormControl>
+					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="password">Password</InputLabel>
 						<Input name="password" type="password" id="password" autoComplete="off" value={password} onChange={e => setPassword(e.target.value)}  />
 					</FormControl>
@@ -92,7 +102,9 @@ function Register(props) {
 						variant="contained"
 						color="primary"
 						onClick={onRegister}
-						className={classes.submit}>
+						className={classes.submit}
+						//onSubmit={}
+						>
 						Register
           			</Button>
 
@@ -113,8 +125,21 @@ function Register(props) {
 		</main>
 	)
 
-	async function onRegister() {
+	async function onRegister(e) {
 		try {
+			e.preventDefault()
+		const db = firebase.db;
+		db.settings({
+		  timestampsInSnapshots: true
+		});
+		const userRef = db.collection('users').doc(name).set({
+		  fullname: name,
+		  email: email,
+		  phoneNumber: number,
+		  password: password,
+		  
+
+		});  
 			await firebase.register(name, email, password)
 			props.history.replace('/dashboard')
 		} catch(error) {

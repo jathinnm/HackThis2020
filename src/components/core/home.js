@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#2D5D7B"
       },
       image: {
-        // backgroundImage: 'url(https://source.unsplash.com/random)',
+       
         backgroundRepeat: 'no-repeat',
         backgroundColor: 
           theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -61,19 +61,20 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
         padding:'5%',
-        // fontSize: 'large'
+       
       },
       homeIcon:{
         width: '5vh',
         height: '10vh',
       },
       form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%', 
         marginTop: theme.spacing(1),
       },
       submit: {
         margin: theme.spacing(3, 0, 2),
         marginTop: '5vh',
+        alignItems: 'center'
         
         
       },
