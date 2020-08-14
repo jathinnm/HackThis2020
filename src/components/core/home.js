@@ -46,15 +46,6 @@ const useStyles = makeStyles((theme) => ({
         color:'white',
         fontFamily: [
             '-apple-system',
-            //'BlinkMacSystemFont',
-            // '"Segoe UI"',
-            // 'Roboto',
-            // '"Helvetica Neue"',
-            // 'Arial',
-            // 'sans-serif',
-            // '"Apple Color Emoji"',
-            // '"Segoe UI Emoji"',
-            // '"Segoe UI Symbol"',
           ]
       },
       avatar: {
@@ -83,9 +74,11 @@ const useStyles = makeStyles((theme) => ({
 
     export default function HomePage() {
     const classes = useStyles();
+    //States
     const [registerOpen, setRegisterOpen] = React.useState(false);
     const [loginOpen, setLoginOpen] = React.useState(false);
 
+    //Methods to update States and toggle popUp
     const handleRegisterOpen = () => {
         setRegisterOpen(true);
     };

@@ -49,14 +49,12 @@ const styles = theme => ({
 function Register(props) {
 	const { classes } = props
 
+	//States
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [number, setNumber] = useState('')
 	const [password, setPassword] = useState('')
-	const addUser = e => {
-		
-		
-	  };
+	
 	return (
 		<main className={classes.main}>
 			<Modal
@@ -107,24 +105,14 @@ function Register(props) {
 						>
 						Register
           			</Button>
-
-					{/* <Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						color="secondary"
-						component={Link}
-						to="/"
-						className={classes.submit}>
-						Go back to Home
-          			</Button> */}
 				</form>
 			</Paper>
 			</Fade>
       </Modal>
 		</main>
 	)
-
+	
+	//Function to submit the info to the Database and Authorize the user
 	async function onRegister(e) {
 		try {
 			e.preventDefault()

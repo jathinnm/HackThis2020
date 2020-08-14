@@ -39,30 +39,17 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
+//Questions
 function getSteps() {
    
   return ['Why are you using (insert app name)?', 'Select your year in college', 'Select your major/career area', 'Select your primary interest'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <h1>sdk</h1>;
-    case 1:
-      return 'An ad group contains one or more ads which target a shared set of keywords.';
-    case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-    default:
-      return 'Unknown step';
-  }
-}
+
 
 function Questions() {
   const classes = useStyles();
+  //States
   const [activeStep, setActiveStep] = React.useState(0);
   const [year, setYear] = React.useState('');
   const [major, setMajor] = React.useState('');
@@ -79,6 +66,7 @@ function Questions() {
 
   const steps = getSteps();
 
+//Grabs the phone number
  useEffect(() => {
     const db = firebase.db;
     db.settings({
@@ -102,6 +90,7 @@ function Questions() {
     });
     
 })
+//Methods to set the for values
   const handleReasonChange = (event) => {
     setReason({ ...reason, [event.target.name]: event.target.checked });
   };
@@ -119,7 +108,7 @@ function Questions() {
 
 
 
-
+//Methods to handle navigation of form
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -211,12 +200,6 @@ function Questions() {
           <Step key='Select your major/career area'>
             <StepLabel>Select your major/career area</StepLabel>
             <StepContent>
-              {/* <RadioGroup aria-label="grades" name="grades" value={year} onChange={handleYearChange}>
-                        <FormControlLabel value="Freshman" control={<Radio />} label="Freshman" />
-                        <FormControlLabel value="Sophomore" control={<Radio />} label="Sophomore" />
-                        <FormControlLabel value="Junior" control={<Radio />} label="Junior" />
-                        <FormControlLabel value="Senior" control={<Radio />} label="Senior" />
-                    </RadioGroup> */}
               <RadioGroup aria-label="major" name="major" value={major} onChange={handleMajorChange}>
                 <FormControlLabel value="Business" control={<Radio />} label="Business" />
                 <FormControlLabel value="Social sciences and history" control={<Radio />} label="Social sciences and history" />
@@ -312,7 +295,7 @@ function Questions() {
       <h1>{firebase.getCurrentNumber}</h1>
     </div>
   );
-
+//Grabs the group Id from the database
   async function onFormSave(e) {
     
    
@@ -333,9 +316,7 @@ function Questions() {
       console.log(myInterest);
       var docRef = db.collection('groups').doc(myInterest);
       console.log(docRef);
-      // var groupId = "";
 
-      //var groupId = docRef.get("groupId");
 
       docRef.get().then(function (doc) {
         if (doc.exists) {
@@ -343,22 +324,18 @@ function Questions() {
           setGroupId(doc.data().groupId)
           
         } else {
-          // doc.data() will be undefined in this case
+          
           console.log("No such document!");
         }
       }).catch(function (error) {
         console.log("Error getting document:", error);
       });
-      
-
-      // need to figure out how to call groupID from firebase
-      // need to figure out how to call profile info
-      // const groupId = "61254788";
-      // const phone_number = 
-      
+    
    
     }
   }
+  
+  //Make the group in group me
   async function onFormSubmit(e) {
       e.preventDefault()
     console.log(groupId);

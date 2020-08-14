@@ -15,15 +15,17 @@ const theme = createMuiTheme()
 
 export default function App() {
 
-	const [firebaseInitialized, setFirebaseInitialized] = useState(false)
+	//States
+    const [firebaseInitialized, setFirebaseInitialized] = useState(false)
 
+	//Initialize Firebase onLoad
 	useEffect(() => {
 		firebase.isInitialized().then(val => {
 			setFirebaseInitialized(val)
 		})
 	})
 
-
+//Controls routes between different components
 	return firebaseInitialized !== false ? (
 		<MuiThemeProvider theme={theme}>
 			<CssBaseline />

@@ -25,6 +25,7 @@ import { Link } from 'react-router-dom'
 const drawerWidth = 220;
 const appWidth= `calc(100% - ${drawerWidth}px)`
 
+//Css
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -85,9 +86,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PermanentDrawerLeft(props) {
   const classes = useStyles();
+  //State
   const [quote, setQuotes] = useState('')
   
-
+	//Check if user is logged in
   if(!firebase.getCurrentUsername()) {
 	// not logged in
 	alert('Please login first')
@@ -161,93 +163,11 @@ export default function PermanentDrawerLeft(props) {
 </div>
     
   );
+  
+  //logs out the user
   async function logout() {
 	await firebase.logout()
 	props.history.push('/')
 }
 
 }
-
-// import React, { useEffect, useState } from 'react'
-// import { Typography, Paper, Avatar, CircularProgress, Button } from '@material-ui/core'
-// import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
-// import withStyles from '@material-ui/core/styles/withStyles'
-// import firebase from "../../config/firebase.js"
-// import { withRouter } from 'react-router-dom'
-
-// const styles = theme => ({
-//     background: {
-//         backgroundColor: "#2D5D7B",
-//     },
-// 	main: {
-// 		width: 'auto',
-// 		display: 'block', // Fix IE 11 issue.
-// 		marginLeft: theme.spacing.unit * 3,
-// 		marginRight: theme.spacing.unit * 3,
-// 		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-// 			width: 400,
-// 			marginLeft: 'auto',
-// 			marginRight: 'auto',
-//         },
-        
-// 	},
-// 	paper: {
-// 		marginTop: theme.spacing.unit * 8,
-// 		display: 'flex',
-// 		flexDirection: 'column',
-// 		alignItems: 'center',
-// 		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-// 	},
-// 	avatar: {
-// 		margin: theme.spacing.unit,
-// 		backgroundColor: theme.palette.secondary.main,
-// 	},
-// 	submit: {
-// 		marginTop: theme.spacing.unit * 3,
-// 	},
-// })
-
-// function Dashboard(props) {
-// 	const { classes } = props
-//     const [quote, setQuotes] = useState('')
-
-
-// 	if(!firebase.getCurrentUsername()) {
-// 		// not logged in
-// 		alert('Please login first')
-// 		props.history.replace('/')
-// 		return null
-// 	}
-
-	
-// 	return (
-//         <div className = {classes.background}>
-//             <main className={classes.main}>
-//                 <Paper className={classes.paper}>
-//                     <Avatar className={classes.avatar}>
-//                         <VerifiedUserOutlined />
-//                     </Avatar>
-//                     <Typography component="h1" variant="h5">
-//                         Hello { firebase.getCurrentUsername() }
-//                     </Typography>
-//                     <Button
-//                         type="submit"
-//                         fullWidth
-//                         variant="contained"
-//                         color="secondary"
-//                         onClick={logout}
-//                         className={classes.submit}>
-//                         Logout
-//                     </Button>
-//                 </Paper>
-//             </main>
-//         </div>
-// 	)
-
-// 	async function logout() {
-// 		await firebase.logout()
-// 		props.history.push('/')
-// 	}
-// }
-
-// export default withRouter(withStyles(styles)(Dashboard))

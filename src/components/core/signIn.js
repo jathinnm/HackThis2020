@@ -47,7 +47,7 @@ const styles = theme => ({
 
 function SignIn(props) {
 	const { classes } = props
-
+	//State
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -97,7 +97,7 @@ function SignIn(props) {
       </Modal>
 		</main>
 	)
-
+	//Function to get the User to Login
 	async function login() {
 		try {
 			await firebase.login(email, password)

@@ -57,12 +57,14 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit() {
   const classes = useStyles();
+  //States
   const [name, setName] = React.useState('');
   const [number, setNumber] = React.useState('');
   const [major, setMajor] = React.useState('');
   const [interest, setInterest] = React.useState('');
   const [year, setYear] = React.useState('');
-
+    
+  //Methods to set the states for form values.
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -163,6 +165,7 @@ function Edit() {
     </main>
       );
 
+    //Submits the info to the database
       async function onFormSubmit(e) {
 	
         e.preventDefault()
