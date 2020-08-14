@@ -67,6 +67,8 @@ function Questions() {
     network: false,
     similarInterests: false,
   });
+  const [groupId, setGroupId] = React.useState('');
+
   const { meetPeople, network, similarInterests } = reason;
 
   const steps = getSteps();
@@ -291,42 +293,52 @@ function Questions() {
     if (similarInterests) {
       const myInterest = interest.replace(/\s+/g, '-').toLowerCase();
       console.log(myInterest);
-      var docRef = db.collection("groups").doc("myInterest");
+      var docRef = db.collection('groups').doc(myInterest);
       console.log(docRef);
-      
-      var groupId = docRef.get("groupId");
+      // var groupId = "";
 
-      docRef.get().then(function(doc) {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
+      //var groupId = docRef.get("groupId");
+
+      docRef.get().then(function (doc) {
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+          setGroupId(doc.data().groupId)
+          
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+      console.log(groupId);
+
       // need to figure out how to call groupID from firebase
       // need to figure out how to call profile info
       // const groupId = "61254788";
-      // const nickname = firebase.getCurrentUsername();
+
       // const phone_number = 
 
- 
-      const response = await Axios.post(
-        
-        'https://api.groupme.com/v3/groups/61254788/members/add?token=2qAO3FVAg5rM2QPaWYEJeHhjnKNYjFxJCceR3CSy', 
-        {
-          "members" : [
-          {"nickname" : nickname, 
-          "phone_number": "+1 3095317104"}]
+      if (groupId != '') {
+        const nickname = firebase.getCurrentUsername();
+        const url = 'https://api.groupme.com/v3/groups/' + groupId + '/members/add?token=2qAO3FVAg5rM2QPaWYEJeHhjnKNYjFxJCceR3CSy';
+
+        const response = await Axios.post(
+
+          url,
+          {
+            "members": [
+              {
+                "nickname": nickname,
+                "phone_number": "+1 3095317104"
+              }]
+          }
+
+        )
+
+        console.log(response.data.response);
       }
-        
-      )
-      
-      console.log(response.data.response);
     }
-  
   }
 }
 
