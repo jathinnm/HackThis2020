@@ -1,4 +1,15 @@
+# RoundTable 
+An educational lightweight tool to seamlessly connect with virtual students 
+
+## Description
+* Allows the user to connect with peers who share similar interests and career goals 
+* Using our matchmaking algorithm and the GroupMe API, the user is added to designated groupchat(s) automatically 
+* This project was built using ReactJS, Material UI, and Google Firebase 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+* Disclaimer (you may need to install axios) 
+npm install axios 
 
 ## Available Scripts
 
