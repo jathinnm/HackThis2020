@@ -272,6 +272,7 @@ function Questions() {
           </Paper>
         )}
       </form>
+      <h1>{firebase.getCurrentNumber}</h1>
     </div>
   );
 
@@ -316,7 +317,6 @@ function Questions() {
       // need to figure out how to call groupID from firebase
       // need to figure out how to call profile info
       // const groupId = "61254788";
-
       // const phone_number = 
 
       if (groupId != '') {
@@ -338,8 +338,13 @@ function Questions() {
 
         console.log(response.data.response);
       }
+        
+      
+      alert("Your group has been created")
+      console.log(response.data.response);
     }
   }
 }
+
 
 export default Questions

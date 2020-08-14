@@ -98,7 +98,7 @@ export default function PermanentDrawerLeft(props) {
        <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h4" noWrap className={classes.typography}>
-		  Hello { firebase.getCurrentUsername() }
+		  Hello { firebase.getCurrentNumber() }
           </Typography>
         </Toolbar>
       </AppBar> 

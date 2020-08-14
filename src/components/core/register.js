@@ -140,7 +140,7 @@ function Register(props) {
 		  
 
 		});  
-			await firebase.register(name, email, password)
+			await firebase.register(name, email, password,number)
 			props.history.replace('/dashboard')
 		} catch(error) {
 			alert(error.message)
