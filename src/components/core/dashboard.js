@@ -19,6 +19,8 @@ import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
 import Questions from "../generic/questions.js"
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { Link } from 'react-router-dom'
+
 
 const drawerWidth = 220;
 const appWidth= `calc(100% - ${drawerWidth}px)`
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
 	margin: theme.spacing.unit,
-	backgroundColor: theme.palette.secondary.main,
+	backgroundColor: '#2D5D7B',
 	},
   drawer: {
     width: drawerWidth,
@@ -112,9 +114,14 @@ export default function PermanentDrawerLeft(props) {
         anchor="left"
       >
         <div className={classes.toolbar} />
-		{/* <Avatar className={classes.avatar}>
-                    <VerifiedUserOutlined />
-        </Avatar> */}
+		
+        
+          <Avatar className={classes.avatar}
+          component={Link}
+          to="/edit"
+          ></Avatar> 
+     
+        
         <Divider />
         <List className = {classes.drawerContent}>
           {['Messages', 'Create Chat'].map((text, index) => (

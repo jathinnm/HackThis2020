@@ -8,7 +8,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { CssBaseline, CircularProgress } from '@material-ui/core'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import firebase from "../../config/firebase.js"
-
+import Edit from "./edit.js" 
 
 
 const theme = createMuiTheme()
@@ -31,6 +31,7 @@ export default function App() {
 				<Switch>
 					<Route exact path="/" component={HomePage} />
 					<Route exact path="/dashboard" component={Dashboard} />
+					<Route exact path="/edit" component={Edit} />
 				</Switch>
 			</Router>
 		</MuiThemeProvider>
